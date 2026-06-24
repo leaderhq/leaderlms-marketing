@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://leaderlms.io"),
-  title: "LeaderLMS — Training built for field leaders",
-  description: "Onboard faster, train smarter, and duplicate your top leaders. LeaderLMS delivers courses, certifications, and compliance training built for network marketing and direct sales teams.",
+  title: "LeaderLMS — Professional Training for Network Marketing Teams",
+  description: "Stop running your team trainings in a Facebook group. LeaderLMS gives your team 21+ certified trainings, bilingual support, quizzes, and completion certificates — ready on day one.",
   applicationName: "LeaderLMS",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
@@ -27,14 +27,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "LeaderLMS",
-    title: "LeaderLMS — Training built for field leaders.",
-    description: "Onboard faster, train smarter, and duplicate your top leaders. Built for network marketing and direct sales teams.",
+    title: "The smarter way to train and grow your team.",
+    description: "Stop running your team trainings in a Facebook group. LeaderLMS gives your team 21+ certified trainings, bilingual support, quizzes, and completion certificates — ready on day one.",
     url: "https://leaderlms.io",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LeaderLMS — Training built for field leaders.",
-    description: "Onboard faster, train smarter, and duplicate your top leaders. Built for network marketing and direct sales teams.",
+    title: "The smarter way to train and grow your team.",
+    description: "Stop running your team trainings in a Facebook group. LeaderLMS gives your team 21+ certified trainings, bilingual support, quizzes, and completion certificates — ready on day one.",
   },
 };
 

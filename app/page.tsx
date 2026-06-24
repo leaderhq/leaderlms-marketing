@@ -8,11 +8,12 @@ const SITE_URL = 'https://leaderlms.io';
 const APP_URL = 'https://lms.leaderhq.io';
 
 const LMS_PHRASES = [
-  'field leaders.',
-  'your whole team.',
-  'new reps.',
-  'your downline.',
-  'top producers.',
+  'certified.',
+  'complete.',
+  'tracked.',
+  'bilingual.',
+  'quiz-verified.',
+  'ready on day one.',
 ] as const;
 
 const NAV_LINKS = [
@@ -55,23 +56,23 @@ const FOOTER_COLUMNS = [
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'LeaderLMS — Training built for field leaders',
+  title: 'LeaderLMS — Professional Training for Network Marketing Teams',
   description:
-    'Onboard faster, train smarter, and duplicate your top leaders. LeaderLMS delivers courses, certifications, and compliance training built for network marketing and direct sales teams.',
+    'Stop running your team trainings in a Facebook group. LeaderLMS gives your team 21+ certified trainings, bilingual support, quizzes, and completion certificates — ready on day one.',
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     siteName: 'LeaderLMS',
-    title: 'LeaderLMS — Training built for field leaders.',
+    title: 'The smarter way to train and grow your team.',
     description:
-      'Onboard faster, train smarter, and duplicate your top leaders. Built for network marketing and direct sales teams.',
+      'Stop running your team trainings in a Facebook group. LeaderLMS gives your team 21+ certified trainings, bilingual support, quizzes, and completion certificates — ready on day one.',
     url: SITE_URL,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LeaderLMS — Training built for field leaders.',
+    title: 'The smarter way to train and grow your team.',
     description:
-      'Onboard faster, train smarter, and duplicate your top leaders. Built for network marketing and direct sales teams.',
+      'Stop running your team trainings in a Facebook group. LeaderLMS gives your team 21+ certified trainings, bilingual support, quizzes, and completion certificates — ready on day one.',
   },
 };
 
@@ -90,9 +91,8 @@ export default function HomePage() {
         <Hero />
         <TrustBand />
         <FeaturesGrid />
-        <CourseBuilderSection />
-        <HowItWorksSection />
-        <IntegrationsSection />
+        <LibrarySection />
+        <CompareSection />
         <PricingSection />
         <FinalCta />
       </main>
@@ -111,24 +111,24 @@ function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-8 md:px-6 lg:grid-cols-2 lg:gap-12 lg:pb-24 lg:pt-12">
         <FadeIn>
           <TypewriterHeadline
-            staticPrefix="Training built for"
+            staticPrefix="Your team's training,"
             phrases={LMS_PHRASES}
             className="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
           />
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-zinc-600">
-            LeaderLMS turns your best leaders into a repeatable system. Build courses, certify your team, and onboard new reps in days — not weeks. Stop training from scratch. Start duplicating what works.
+            Stop running your Silver Course through a Facebook group. LeaderLMS gives your entire team a professional learning hub — 21+ bilingual trainings, quizzes, and certificates — ready on day one.
           </p>
           <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <a href={`${APP_URL}/signup`} className="inline-flex min-h-[44px] w-full items-center justify-center rounded-xl bg-brand-green px-6 text-base font-semibold text-white shadow-md shadow-brand-green/25 transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-navy sm:w-auto">
-              Start Free Trial
+              Get Started Free
             </a>
-            <Link href="/how-it-works" className="inline-flex min-h-[44px] items-center justify-center rounded-xl px-4 text-base font-semibold text-brand-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
-              See How It Works →
+            <Link href="/pricing" className="inline-flex min-h-[44px] items-center justify-center rounded-xl px-4 text-base font-semibold text-brand-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
+              See all courses →
             </Link>
           </div>
           <p className="mt-5 text-sm text-zinc-500">
             Free to start. No credit card required.{' '}
-            <strong className="font-semibold text-zinc-700">Built for network marketing and direct sales teams.</strong>
+            <strong className="font-semibold text-zinc-700">Professional training for network marketing teams.</strong>
           </p>
         </FadeIn>
         <FadeIn delay={120} className="flex justify-center lg:justify-end">
@@ -139,16 +139,23 @@ function Hero() {
   );
 }
 
-const TRUST_ORGS = ['Summit', 'Northwind', 'Apex', 'Vertex', 'Beacon'];
+const STAT_ITEMS = [
+  { value: '21+', label: 'trainings included' },
+  { value: '2', label: 'languages (EN & ES)' },
+  { value: '100%', label: 'quiz-verified' },
+  { value: '∞', label: 'custom uploads' },
+];
 
 function TrustBand() {
   return (
     <section className="border-y border-zinc-100 bg-zinc-50/60">
       <div className="mx-auto max-w-5xl px-4 py-7 md:px-6">
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
-          <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">Trusted by</p>
-          {TRUST_ORGS.map((org) => (
-            <span key={org} className="text-sm font-bold tracking-wide text-zinc-400">{org}</span>
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
+          {STAT_ITEMS.map((s) => (
+            <div key={s.label} className="flex flex-col items-center">
+              <span className="text-2xl font-black text-brand-navy">{s.value}</span>
+              <span className="text-xs font-semibold text-zinc-400">{s.label}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -159,18 +166,12 @@ function TrustBand() {
 interface Feature { title: string; body: string; icon: MarketingIconName; }
 
 const FEATURES: Feature[] = [
-  { title: 'Course builder.', body: 'Build courses with video, text, quizzes, and downloads — in minutes. No design skills needed. If you can record a Zoom, you can build a course.', icon: 'clipboard' },
-  { title: 'Fast Start tracks.', body: 'Drop new reps into a structured 30-day Fast Start the moment they join. They hit the ground running instead of asking you the same questions for weeks.', icon: 'target' },
-  { title: 'Certifications.', body: 'Award certificates when reps complete a course or pass a quiz. Show your upline, your team, and your prospects that your people are trained and ready.', icon: 'trophy' },
-  { title: 'Team progress tracking.', body: 'See exactly where every rep is in their training at a glance. Spot who is stuck, who has finished, and who has not even started.', icon: 'bar-chart' },
-  { title: 'Quizzes & assessments.', body: 'Add knowledge checks to any lesson. Make sure your reps actually learned the material before they hit the field.', icon: 'check-circle' },
-  { title: 'Compliance training.', body: 'Deliver required compliance modules and track completion with an audit trail. Stay on the right side of your company policies — automatically.', icon: 'link' },
-  { title: 'Automated enrollment.', body: 'New reps get enrolled in their onboarding track the day they join. No manual setup, no chasing down who still needs access.', icon: 'bell' },
-  { title: 'Video hosting included.', body: 'Upload your training videos directly — no separate Vimeo account, no YouTube links that get removed. Your content, hosted where you control it.', icon: 'share' },
-  { title: 'Team leaderboard.', body: 'Gamify your training with a completion leaderboard. A little friendly competition goes a long way when your team can see who is leading the pack.', icon: 'users' },
-  { title: 'Leader Suite SSO.', body: "One login across the whole suite. Your reps are already signed in through LeaderLeads or LeaderCal — LeaderLMS just works.", icon: 'building' },
-  { title: 'Mobile-first.', body: 'Your reps learn from their phones, between events and on the road. Every course plays great on mobile — no app download required.', icon: 'clock' },
-  { title: 'Drip scheduling.', body: 'Release lessons on a schedule — so new reps absorb training at the right pace instead of getting overwhelmed by a 40-module library on day one.', icon: 'calendar' },
+  { title: 'English & Español.', body: 'Every training is available in both languages. Learners switch with one tap — no separate groups, no extra work on your end, ever.', icon: 'users' },
+  { title: 'Quizzes after every video.', body: 'Auto-graded questions confirm comprehension before the next lesson unlocks. Stop re-explaining content to people who skipped ahead.', icon: 'check-circle' },
+  { title: 'Certified completion.', body: 'Every learner earns an official certificate when they finish a course. Real proof. Something to share, something to be proud of, something to post.', icon: 'trophy' },
+  { title: 'Add your own content.', body: 'Upload your own videos, PDFs, and custom training modules right alongside the included library. Your system, your content, your brand.', icon: 'share' },
+  { title: '21+ trainings included.', body: 'A complete network-marketing training library is ready to assign the moment you open your account. Not a blank slate — a fully loaded platform from day one.', icon: 'clipboard' },
+  { title: 'Works on any device.', body: 'Mobile-first design means your team trains on their phone, tablet, or laptop — at home, at a hotel, or in between calls at a conference.', icon: 'clock' },
 ];
 
 function FeaturesGrid() {
@@ -178,8 +179,8 @@ function FeaturesGrid() {
     <section className="mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-24">
       <FadeIn>
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">Everything you need to train a winning team.</h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-zinc-600">Built for the way field leaders actually train — fast, mobile, and focused on duplication.</p>
+          <h2 className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">Everything your team needs to train and certify.</h2>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-zinc-600">Bilingual, quiz-verified, and certificate-ready — built for the way network marketing teams actually learn.</p>
         </div>
       </FadeIn>
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -197,48 +198,56 @@ function FeaturesGrid() {
   );
 }
 
-function CourseBuilderSection() {
+const LIBRARY_COURSES = [
+  'Getting Started Fast',
+  'Your Business Opportunity',
+  'Recruiting & Inviting',
+  'Handling Objections',
+  'Social Media Strategy',
+  'Building with Events',
+  'Product Training',
+  'Follow-Up Mastery',
+  'Leadership Development',
+  'Team Culture & Recognition',
+  'Building Your Story',
+  'Compliance & Ethics',
+  'Closing & Commitment',
+  'Time Management',
+];
+
+function LibrarySection() {
   return (
     <section className="relative overflow-hidden text-white" style={{ background: '#06163E' }}>
       <div className="mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-24 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
         <FadeIn>
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-green">Built to duplicate your best leaders</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-green">Loaded from day one</p>
           <h2 className="mt-4 text-3xl font-bold leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-            Your best rep.<br />Cloned into a course.
+            A complete library<br />from day one.
           </h2>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-zinc-300">
-            Stop relying on your top earner to personally train every new rep. Capture what they know in LeaderLMS — their scripts, their objection handling, their fast-start system — and deliver it automatically to every new team member from day one.
+            Not a blank slate. The moment you open your account, 21+ professional network-marketing trainings are ready to assign. Your team starts learning on day one — no setup required.
           </p>
           <p className="mt-6 border-l-2 border-brand-green pl-4 text-base font-medium text-zinc-200">
-            The teams that scale fastest are the ones who stopped training individually and started training systematically.
+            Every course is bilingual, quiz-gated, and certificate-ready out of the box.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a href={`${APP_URL}/signup`} className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-brand-green px-5 text-sm font-semibold text-white shadow-md shadow-brand-green/25 transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-              Start free trial →
+              Get Started Free →
             </a>
-            <Link href="/how-it-works" className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-white/20 px-5 text-sm font-semibold text-zinc-200 transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-              See how it works
-            </Link>
           </div>
         </FadeIn>
         <FadeIn delay={120} className="mt-12 flex justify-center lg:mt-0 lg:justify-end">
-          <div className="relative w-full max-w-[320px] space-y-4">
-            {[
-              { label: 'Fast Start: Your First 30 Days', pct: 100, status: 'Certified', color: '#5CAC23' },
-              { label: 'Prospecting & Lead Capture', pct: 75, status: '75% complete', color: '#1862EA' },
-              { label: 'Objection Handling', pct: 33, status: '33% complete', color: '#1862EA' },
-              { label: 'Building Your Downline', pct: 0, status: 'Not started', color: '#d1d5db' },
-            ].map((item) => (
-              <div key={item.label} className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                <div className="mb-2 flex items-center justify-between gap-2">
-                  <span className="text-xs font-semibold text-white">{item.label}</span>
-                  <span className="shrink-0 text-xs font-medium" style={{ color: item.color }}>{item.status}</span>
-                </div>
-                <div className="h-1.5 rounded-full" style={{ background: 'rgba(255,255,255,0.10)' }}>
-                  <div className="h-full rounded-full" style={{ width: `${item.pct}%`, background: item.color }} />
-                </div>
+          <div className="relative w-full max-w-[340px] space-y-2">
+            {LIBRARY_COURSES.map((course, i) => (
+              <div key={course} className="flex items-center gap-3 rounded-xl px-4 py-3" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.10)' }}>
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold" style={{ background: '#5CAC2330', color: '#5CAC23', border: '1px solid #5CAC2350' }}>✓</span>
+                <span className="text-sm font-medium text-zinc-100">{course}</span>
               </div>
             ))}
+            <div className="flex items-center gap-3 rounded-xl px-4 py-3" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold" style={{ background: '#1862EA30', color: '#1862EA', border: '1px solid #1862EA50' }}>+7</span>
+              <span className="text-sm font-medium text-zinc-400">more trainings included</span>
+            </div>
           </div>
         </FadeIn>
       </div>
@@ -246,72 +255,66 @@ function CourseBuilderSection() {
   );
 }
 
-const STEPS = [
-  { step: '01', title: 'Build your course.', body: 'Record your training, upload your videos, add quizzes and downloads. LeaderLMS course builder takes minutes — no tech team needed.' },
-  { step: '02', title: 'Enroll your team.', body: 'Add your reps and assign training tracks. New members can be enrolled automatically the day they join — no manual setup.' },
-  { step: '03', title: 'They train. You track.', body: 'Your team works through the material on their own time, on any device. You see exactly who has finished, who is stuck, and who has not started.' },
-  { step: '04', title: 'Certify and scale.', body: 'Award certifications when reps complete a track. Then duplicate the whole system to your next team — no rebuilding from scratch.' },
+const COMPARE_ROWS = [
+  'Completion tracking',
+  'Bilingual (EN & ES)',
+  'Quizzes after every lesson',
+  'Completion certificates',
+  '21+ included trainings',
+  'Custom content uploads',
+  'Clear learning path',
+  'Professional & branded experience',
+  'Scales with your team',
 ];
 
-function HowItWorksSection() {
+function CompareSection() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-24">
+    <section className="mx-auto max-w-4xl px-4 py-20 md:px-6 md:py-24">
       <FadeIn>
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">Build once. Train everyone.</h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-zinc-600">Four steps from raw training content to a certified, field-ready team.</p>
+          <h2 className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">Facebook Group vs. LeaderLMS</h2>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-zinc-600">You already know what training in a Facebook group feels like. Here&apos;s what it looks like side by side.</p>
         </div>
       </FadeIn>
-      <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {STEPS.map((s, i) => (
-          <FadeIn key={s.step} delay={i * 80} className="relative">
-            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-brand-navy text-base font-black text-brand-green">{s.step}</div>
-            <h3 className="text-base font-bold text-brand-navy">{s.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600">{s.body}</p>
-          </FadeIn>
+      <div className="mt-12 overflow-hidden rounded-2xl border border-zinc-200 shadow-sm">
+        {/* Header */}
+        <div className="grid grid-cols-3 border-b border-zinc-200 bg-zinc-50">
+          <div className="px-4 py-3 text-sm font-semibold text-zinc-400">Feature</div>
+          <div className="border-x border-zinc-200 px-4 py-3 text-center text-sm font-semibold text-zinc-400">Facebook Group</div>
+          <div className="px-4 py-3 text-center text-sm font-bold text-brand-navy">LeaderLMS</div>
+        </div>
+        {COMPARE_ROWS.map((row, i) => (
+          <div key={row} className={`grid grid-cols-3 border-b border-zinc-100 last:border-0 ${i % 2 === 0 ? 'bg-white' : 'bg-zinc-50/40'}`}>
+            <div className="px-4 py-3 text-sm font-medium text-zinc-700">{row}</div>
+            <div className="flex items-center justify-center border-x border-zinc-100 px-4 py-3">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-red-50 text-xs font-bold text-red-400">✗</span>
+            </div>
+            <div className="flex items-center justify-center px-4 py-3">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-green/10 text-xs font-bold text-brand-green">✓</span>
+            </div>
+          </div>
         ))}
       </div>
     </section>
   );
 }
 
-const INTEGRATIONS = ['LeaderLeads','LeaderTask','LeaderCal','LeaderSend','LeaderStreams','LeaderAssist','Google Drive','Zoom','Vimeo','Slack','Zapier','Postmark'];
-
-function IntegrationsSection() {
-  return (
-    <section className="border-y border-zinc-100 bg-zinc-50/50">
-      <div className="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-20 text-center">
-        <FadeIn>
-          <h2 className="text-2xl font-bold text-brand-navy sm:text-3xl">Plugs into the tools your team already uses.</h2>
-          <p className="mx-auto mt-3 max-w-lg text-base text-zinc-600">LeaderLMS works inside the Leader Suite and connects to the tools your reps already have on their phones.</p>
-        </FadeIn>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          {INTEGRATIONS.map((name, i) => (
-            <FadeIn key={name} delay={i * 40}>
-              <span className="inline-block rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold text-zinc-600 shadow-sm">{name}</span>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 const TIERS = [
   {
-    name: 'Free', price: '$0', period: 'forever', description: 'For solo leaders getting started.',
-    features: ['Up to 3 courses','Up to 10 learners','Video hosting (2 GB)','Quizzes & assessments','Leader Suite SSO'],
-    cta: 'Start for free', href: `${APP_URL}/signup`, featured: false,
+    name: 'Starter', price: '$49', period: '/mo', description: 'For leaders getting their team started.',
+    features: ['Up to 25 learners','21+ included trainings','English & Español','Quizzes after every video','Completion certificates','Learner progress dashboard'],
+    cta: 'Get Started Free', href: `${APP_URL}/signup`, featured: false,
   },
   {
-    name: 'Team', price: '$19', period: 'per user / mo', description: 'For growing teams that need to scale training.',
-    features: ['Unlimited courses','Unlimited learners','Video hosting (100 GB)','Certifications','Automated enrollment','Drip scheduling','Team leaderboard','Compliance tracking','All Leader Suite integrations'],
-    cta: 'Start Team trial', href: `${APP_URL}/signup?plan=team`, featured: true,
+    name: 'Growth', price: '$99', period: '/mo', description: 'For growing teams ready to scale.',
+    features: ['Up to 100 learners','Everything in Starter','Upload your own videos & PDFs','Custom training modules','Leader content library','Priority support'],
+    cta: 'Get Started Free', href: `${APP_URL}/signup?plan=growth`, featured: true,
   },
   {
-    name: 'Executive', price: '$39', period: 'per user / mo', description: 'For organizations training at scale.',
-    features: ['Everything in Team','Unlimited video hosting','Custom branding','Audit logs & reporting','SSO enforcement','Dedicated onboarding','Priority support','Multi-team management'],
-    cta: 'Contact sales', href: '/contact', featured: false,
+    name: 'Leader Pro', price: 'Custom', period: '', description: 'For large organizations at scale.',
+    features: ['Unlimited learners','Everything in Growth','Unlimited learner seats','White-label branding','SSO & team management','Dedicated account manager'],
+    cta: 'Contact us', href: '/contact', featured: false,
   },
 ];
 
@@ -320,8 +323,8 @@ function PricingSection() {
     <section className="mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-24">
       <FadeIn>
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">Straightforward pricing.</h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-zinc-600">Start free. Unlock the full power when your team is ready.</p>
+          <h2 className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">Simple, transparent pricing.</h2>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-zinc-600">Start free. Scale up when your team is ready for more.</p>
         </div>
       </FadeIn>
       <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -363,20 +366,17 @@ function FinalCta() {
     <section className="bg-brand-navy py-20 text-center text-white md:py-24">
       <FadeIn>
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Stop training individually.<br />Start duplicating at scale.
+          Your next rank advance starts<br />with trained leaders.
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-lg text-zinc-300">
-          LeaderLMS turns your best systems into courses your whole team can learn from — so you spend less time repeating yourself and more time leading.
+          Stop hoping they watched the video. Start knowing they passed the quiz.
         </p>
         <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <a href={`${APP_URL}/signup`} className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-brand-green px-7 text-base font-semibold text-white shadow-lg shadow-brand-green/20 transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-            Start free trial
+            Get Started Free
           </a>
-          <Link href="/how-it-works" className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-white/20 px-7 text-base font-semibold text-zinc-200 transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-            See how it works
-          </Link>
         </div>
-        <p className="mt-5 text-sm text-zinc-400">Free to start. Part of the Leader Suite.</p>
+        <p className="mt-5 text-sm text-zinc-400">Part of the Leader Suite.</p>
       </FadeIn>
     </section>
   );
