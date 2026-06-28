@@ -19,6 +19,13 @@ export const metadata: Metadata = {
   description: "Stop running your team trainings in a Facebook group. LeaderLMS gives your team 21+ certified trainings, bilingual support, quizzes, and completion certificates — ready on day one.",
   applicationName: "LeaderLMS",
   manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon-light.png", type: "image/png", media: "(prefers-color-scheme: light)" },
+      { url: "/favicon-dark.png", type: "image/png", media: "(prefers-color-scheme: dark)" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+  },
   appleWebApp: {
     capable: true,
     title: "LeaderLMS",
